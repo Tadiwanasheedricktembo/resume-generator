@@ -58,7 +58,7 @@ It is a Django-based resume generator that allows users to enter their details, 
 - Add more resume templates
 - Improve the PDF design further
 
-SCREENSHOTS
+## Screenshots
 
 
 
@@ -66,6 +66,9 @@ SCREENSHOTS
 
 
 
-THE GENERATED RESUME PDF
+- ![Resume Form](screenshots/Screenshot%202026-07-02%20162831.png)
+- ![Resume Form 2](screenshots/Screenshot%202026-07-02%20162941.png)
+- ![Resume Success](screenshots/Screenshot%202026-07-02%20163427.png)
+- ![Generated Resume PDF](screenshots/Screenshot%202026-07-02%20163502.png)
 
 
