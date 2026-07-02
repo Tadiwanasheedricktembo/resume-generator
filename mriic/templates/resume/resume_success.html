@@ -4,18 +4,72 @@
     <meta charset="UTF-8" />
     <title>Resume Submitted</title>
     <style>
-        body { font-family: Arial, sans-serif; background: #f3f6fb; color: #233; padding: 24px; }
-        .card { max-width: 700px; margin: 40px auto; background: white; padding: 28px; border-radius: 10px; box-shadow: 0 8px 22px rgba(0,0,0,0.08); }
-        h1 { color: #1f4e79; }
-        .btn { display: inline-block; background: #1f4e79; color: white; padding: 10px 14px; text-decoration: none; border-radius: 6px; margin-top: 12px; }
+        body {
+            font-family: "Inter", "Segoe UI", Arial, sans-serif;
+            background: #eef1f7;
+            color: #1c2a44;
+            margin: 0;
+            padding: 28px 16px 40px;
+        }
+        .container {
+            max-width: 740px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 32px;
+            box-shadow: 0 18px 38px rgba(19, 55, 118, 0.12);
+            border: 1px solid rgba(19, 55, 118, 0.08);
+        }
+        h1 {
+            margin-top: 0;
+            color: #133766;
+            font-size: 1.95rem;
+            letter-spacing: -0.03em;
+        }
+        p {
+            color: #4f6178;
+            line-height: 1.8;
+            margin: 0 0 16px;
+        }
+        .detail-label {
+            font-weight: 700;
+            color: #133766;
+        }
+        .summary {
+            background: #f5f8ff;
+            padding: 18px 20px;
+            border-radius: 18px;
+            border: 1px solid rgba(19, 55, 118, 0.12);
+            margin-bottom: 20px;
+        }
+        .summary p {
+            margin: 0 0 10px;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #133766;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 16px;
+            padding: 14px 24px;
+            font-weight: 700;
+            transition: background 0.2s ease;
+        }
+        .btn:hover {
+            background: #0f305f;
+        }
     </style>
 </head>
 <body>
-    <div class="card">
+    <div class="container">
         <h1>Resume Submitted Successfully</h1>
-        <p>Your resume data has been saved and the PDF was generated.</p>
-        <p><strong>Name:</strong> {{ resume.name }}</p>
-        <p><strong>PDF File:</strong> {{ resume.generated_pdf.name }}</p>
+        <p>Your resume has been saved and the PDF document was generated with your profile details.</p>
+        <div class="summary">
+            <p><span class="detail-label">Name:</span> {{ resume.name }}</p>
+            <p><span class="detail-label">PDF File:</span> {{ resume.generated_pdf.name }}</p>
+        </div>
         <a class="btn" href="{% url 'download_resume' resume.id %}">Download PDF</a>
     </div>
 </body>

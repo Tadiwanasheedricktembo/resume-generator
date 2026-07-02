@@ -5,76 +5,162 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Resume PDF</title>
     <style>
-        @page { size: A4; margin: 18mm; }
-        body { font-family: Arial, sans-serif; color: #222; font-size: 11px; line-height: 1.45; }
-        .header { display: table; width: 100%; border-bottom: 2px solid #1f4e79; padding-bottom: 12px; margin-bottom: 18px; }
-        .header-left { display: table-cell; width: 75%; vertical-align: top; }
-        .header-right { display: table-cell; width: 25%; text-align: right; vertical-align: top; }
-        .name { font-size: 24px; font-weight: bold; color: #1f4e79; }
-        .role { font-size: 13px; color: #365f7d; margin-top: 4px; }
-        .contact { margin-top: 6px; color: #444; }
-        .photo { width: 95px; height: 115px; object-fit: cover; border: 1px solid #bbb; }
-        .section-title { font-size: 12px; font-weight: bold; color: #1f4e79; border-bottom: 1px solid #999; text-transform: uppercase; margin-top: 14px; margin-bottom: 8px; padding-bottom: 2px; }
-        .section-content { margin-bottom: 10px; }
-        ul { margin: 4px 0 0 16px; padding: 0; }
-        .meta { font-weight: 600; color: #1f4e79; }
+        @page { size: A4; margin: 16mm; }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #1f2933;
+            font-size: 11px;
+            line-height: 1.5;
+            margin: 0;
+            padding: 0;
+            background: #ffffff;
+        }
+        .page {
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            gap: 18px;
+            border-bottom: 3px solid #133766;
+            padding-bottom: 14px;
+            margin-bottom: 18px;
+        }
+        .header-left {
+            flex: 1 1 auto;
+        }
+        .header-right {
+            width: 110px;
+            text-align: right;
+        }
+        .name {
+            font-size: 26px;
+            font-weight: 800;
+            color: #133766;
+            margin-bottom: 5px;
+        }
+        .role {
+            font-size: 12px;
+            color: #375374;
+            margin-bottom: 10px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+        .contact {
+            color: #4a5568;
+            font-size: 10.5px;
+            line-height: 1.75;
+        }
+        .photo {
+            width: 110px;
+            height: 132px;
+            object-fit: cover;
+            border: 1px solid #d1d9e6;
+            border-radius: 12px;
+        }
+        .section {
+            margin-bottom: 16px;
+            padding: 14px 0 0;
+            border-top: 1px solid #e2e8f0;
+        }
+        .section-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: #133766;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        .section-content {
+            color: #2d3748;
+            font-size: 10.8px;
+            line-height: 1.6;
+            margin-bottom: 0;
+            white-space: pre-wrap;
+        }
+        .meta {
+            font-weight: 700;
+            color: #133766;
+        }
+        .link-row {
+            margin-bottom: 4px;
+            font-size: 10.8px;
+        }
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="header-left">
-            <div class="name">{{ resume.name }}</div>
-            <div class="role">IT Student / Aspiring Software Developer</div>
-            <div class="contact">
-                {{ resume.email }}<br>
-                {{ resume.phone_number }}<br>
-                {{ resume.address }}
+    <div class="page">
+        <div class="header">
+            <div class="header-left">
+                <div class="name">{{ resume.name }}</div>
+                <div class="role">Resume Generator</div>
+                <div class="contact">
+                    {{ resume.email }}<br>
+                    {{ resume.phone_number }}<br>
+                    {{ resume.address }}
+                </div>
+            </div>
+            <div class="header-right">
+                {% if photo_url %}
+                    <img class="photo" src="{{ photo_url }}" alt="Passport Photo" />
+                {% endif %}
             </div>
         </div>
-        <div class="header-right">
-            {% if photo_url %}
-                <img class="photo" src="{{ photo_url }}" alt="Passport Photo" />
-            {% endif %}
+
+        {% if resume.education_level %}
+        <div class="section">
+            <div class="section-title">Education</div>
+            <div class="section-content"><span class="meta">Level:</span> {{ resume.education_level }}</div>
         </div>
+        {% endif %}
+
+        {% if resume.skills %}
+        <div class="section">
+            <div class="section-title">Skills</div>
+            <div class="section-content">{{ resume.skills|linebreaksbr }}</div>
+        </div>
+        {% endif %}
+
+        {% if resume.work_experience %}
+        <div class="section">
+            <div class="section-title">Work Experience</div>
+            <div class="section-content">{{ resume.work_experience|linebreaksbr }}</div>
+        </div>
+        {% endif %}
+
+        {% if resume.projects %}
+        <div class="section">
+            <div class="section-title">Projects</div>
+            <div class="section-content">{{ resume.projects|linebreaksbr }}</div>
+        </div>
+        {% endif %}
+
+        {% if resume.certifications %}
+        <div class="section">
+            <div class="section-title">Certifications</div>
+            <div class="section-content">{{ resume.certifications|linebreaksbr }}</div>
+        </div>
+        {% endif %}
+
+        {% if resume.languages %}
+        <div class="section">
+            <div class="section-title">Languages</div>
+            <div class="section-content">{{ resume.languages }}</div>
+        </div>
+        {% endif %}
+
+        {% if resume.linkedin_profile or resume.github_profile or resume.portfolio_website %}
+        <div class="section">
+            <div class="section-title">Links</div>
+            <div class="section-content">
+                {% if resume.linkedin_profile %}<div class="link-row">LinkedIn: {{ resume.linkedin_profile }}</div>{% endif %}
+                {% if resume.github_profile %}<div class="link-row">GitHub: {{ resume.github_profile }}</div>{% endif %}
+                {% if resume.portfolio_website %}<div class="link-row">Portfolio: {{ resume.portfolio_website }}</div>{% endif %}
+            </div>
+        </div>
+        {% endif %}
     </div>
-
-    {% if resume.education_level %}
-    <div class="section-title">Education</div>
-    <div class="section-content"><span class="meta">Level:</span> {{ resume.education_level }}</div>
-    {% endif %}
-
-    {% if resume.skills %}
-    <div class="section-title">Skills</div>
-    <div class="section-content">{{ resume.skills|linebreaksbr }}</div>
-    {% endif %}
-
-    {% if resume.work_experience %}
-    <div class="section-title">Work Experience</div>
-    <div class="section-content">{{ resume.work_experience|linebreaksbr }}</div>
-    {% endif %}
-
-    {% if resume.projects %}
-    <div class="section-title">Projects</div>
-    <div class="section-content">{{ resume.projects|linebreaksbr }}</div>
-    {% endif %}
-
-    {% if resume.certifications %}
-    <div class="section-title">Certifications</div>
-    <div class="section-content">{{ resume.certifications|linebreaksbr }}</div>
-    {% endif %}
-
-    {% if resume.languages %}
-    <div class="section-title">Languages</div>
-    <div class="section-content">{{ resume.languages }}</div>
-    {% endif %}
-
-    {% if resume.linkedin_profile or resume.github_profile or resume.portfolio_website %}
-    <div class="section-title">Links</div>
-    <div class="section-content">
-        {% if resume.linkedin_profile %}<div>LinkedIn: {{ resume.linkedin_profile }}</div>{% endif %}
-        {% if resume.github_profile %}<div>GitHub: {{ resume.github_profile }}</div>{% endif %}
-        {% if resume.portfolio_website %}<div>Portfolio: {{ resume.portfolio_website }}</div>{% endif %}
-    </div>
-    {% endif %}
 </body>
 </html>
