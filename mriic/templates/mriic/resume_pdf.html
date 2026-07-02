@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ resume.name }} Resume</title>
+
+    <style>
+        @page {
+            size: A4;
+            margin: 18mm;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: #222;
+            font-size: 11px;
+            line-height: 1.45;
+        }
+
+        .header {
+            display: table;
+            width: 100%;
+            border-bottom: 2px solid #1f4e79;
+            padding-bottom: 12px;
+            margin-bottom: 18px;
+        }
+
+        .header-left {
+            display: table-cell;
+            width: 75%;
+            vertical-align: top;
+        }
+
+        .header-right {
+            display: table-cell;
+            width: 25%;
+            text-align: right;
+            vertical-align: top;
+        }
+
+        .name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1f4e79;
+            margin-bottom: 4px;
+        }
+
+        .title {
+            font-size: 12px;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        .contact {
+            font-size: 10px;
+            color: #333;
+        }
+
+        .photo {
+            width: 95px;
+            height: 115px;
+            object-fit: cover;
+            border: 1px solid #bbb;
+        }
+
+        .section {
+            margin-top: 14px;
+        }
+
+        .section-title {
+            font-size: 12px;
+            font-weight: bold;
+            color: #1f4e79;
+            border-bottom: 1px solid #999;
+            padding-bottom: 3px;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .content {
+            white-space: pre-line;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="header-left">
+        <div class="name">{{ resume.name }}</div>
+        <div class="title">IT Student / Aspiring Software Developer</div>
+
+        <div class="contact">
+            Email: {{ resume.email }}<br>
+            Phone: {{ resume.phone_number }}<br>
+            Address: {{ resume.address }}<br>
+
+            {% if resume.linkedin_profile %}
+                LinkedIn: {{ resume.linkedin_profile }}<br>
+            {% endif %}
+
+            {% if resume.github_profile %}
+                GitHub: {{ resume.github_profile }}<br>
+            {% endif %}
+
+            {% if resume.portfolio_website %}
+                Portfolio: {{ resume.portfolio_website }}<br>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="header-right">
+        {% if photo_url %}
+            <img src="{{ photo_url }}" class="photo">
+        {% endif %}
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-title">Profile</div>
+    <div class="content">
+Motivated IT student with an interest in software development, web technologies, and practical digital solutions. Able to apply academic knowledge and technical skills to real-world projects.
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-title">Education</div>
+    <div class="content">{{ resume.education_level }}</div>
+</div>
+
+<div class="section">
+    <div class="section-title">Skills</div>
+    <div class="content">{{ resume.skills }}</div>
+</div>
+
+{% if resume.work_experience %}
+<div class="section">
+    <div class="section-title">Work Experience</div>
+    <div class="content">{{ resume.work_experience }}</div>
+</div>
+{% endif %}
+
+{% if resume.projects %}
+<div class="section">
+    <div class="section-title">Projects</div>
+    <div class="content">{{ resume.projects }}</div>
+</div>
+{% endif %}
+
+{% if resume.certifications %}
+<div class="section">
+    <div class="section-title">Certifications</div>
+    <div class="content">{{ resume.certifications }}</div>
+</div>
+{% endif %}
+
+{% if resume.languages %}
+<div class="section">
+    <div class="section-title">Languages</div>
+    <div class="content">{{ resume.languages }}</div>
+</div>
+{% endif %}
+
+</body>
+</html>

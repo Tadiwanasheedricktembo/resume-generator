@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Resume Submitted</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f3f6fb; color: #233; padding: 24px; }
+        .card { max-width: 700px; margin: 40px auto; background: white; padding: 28px; border-radius: 10px; box-shadow: 0 8px 22px rgba(0,0,0,0.08); }
+        h1 { color: #1f4e79; }
+        .btn { display: inline-block; background: #1f4e79; color: white; padding: 10px 14px; text-decoration: none; border-radius: 6px; margin-top: 12px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Resume Submitted Successfully</h1>
+        <p>Your resume data has been saved and the PDF was generated.</p>
+        <p><strong>Name:</strong> {{ resume.name }}</p>
+        <p><strong>PDF File:</strong> {{ resume.generated_pdf.name }}</p>
+        <a class="btn" href="{% url 'download_resume' resume.id %}">Download PDF</a>
+    </div>
+</body>
+</html>
